@@ -1,12 +1,13 @@
-# fly.toml app configuration file generated for circle-video-website-qsz3ta on 2026-11-05T23:41:03Z
-#
-# See https://fly.io/docs/reference/configuration/ for information about how to use this file.
-#
-
 app = 'circle-video-website-qsz3ta'
 primary_region = 'ams'
 
 [build]
+
+[env]
+  DATA_DIR = '/data'
+  ENABLE_CLEANUP_THREAD = 'true'
+  SESSION_COOKIE_SECURE = 'true'
+
 [http_service]
   internal_port = 8080
   force_https = true
@@ -14,6 +15,10 @@ primary_region = 'ams'
   auto_start_machines = true
   min_machines_running = 0
   processes = ['app']
+
+[mounts]
+  source = 'circle_data'
+  destination = '/data'
 
 [[vm]]
   memory = '1gb'
